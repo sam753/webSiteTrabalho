@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+      <nb-card>
+          <nb-card-header>
+              Comodos da casa
+              <div class="total-style">
+                  <strong>Total de Comodos: ({{ admins?.length }})</strong>
+              </div>
+          </nb-card-header>
+          <nb-card-body>
+              <ng2-smart-table
+                  [settings]="settings"
+                  [source]="source"
+                  (create)="onCreate($event)"
+                  (edit)="onEdit($event)">
+              </ng2-smart-table>
+          </nb-card-body>
+      </nb-card>
+  </div>
+</div>
