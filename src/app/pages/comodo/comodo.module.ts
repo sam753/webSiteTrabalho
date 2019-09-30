@@ -9,13 +9,22 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
+  NbCheckboxModule,
+  NbLayoutModule,
+  NbRouteTabsetModule,
+  NbMenuModule,
+  NbSearchModule,
+  NbSidebarModule,
+  NbPopoverModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { ComodoComponent } from './comodo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ComodoDetailComponent } from './detail/detail.component';
 
 @NgModule({
   imports: [
@@ -33,9 +42,19 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbButtonModule,
     NgxEchartsModule,
     Ng2SmartTableModule,
+    NbCheckboxModule,  
+    NbLayoutModule,
+    NbRouteTabsetModule,
+    NbMenuModule,
+    NbSearchModule,
+    NbSidebarModule,
+    NbPopoverModule,
+    NbContextMenuModule,
+    ReactiveFormsModule
   ],
   declarations: [
-    ComodoComponent
+    ComodoComponent,
+    ComodoDetailComponent
   ],
 
 })

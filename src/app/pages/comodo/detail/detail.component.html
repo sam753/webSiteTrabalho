@@ -1,49 +1,32 @@
-<!-- <div class="col-md-12">
+<div class="col-md-12">
     <nb-card>
-        <nb-card-header class="form-builder-header"><h1>Livro</h1> <button onclick="javascript:history.back()" type="button" class="btn btn-danger">Voltar</button></nb-card-header>
+        <nb-card-header class="form-builder-header"><h1>Comodo</h1> <button onclick="javascript:history.back()" type="button" class="btn btn-danger">Voltar</button></nb-card-header>
         <nb-card-body>
             <form [formGroup]="form" (ngSubmit)="onSubmit()" #addMountForm="ngForm">
                 <div class="form-group">
                     <label for="name">Nome<span>*</span></label>
-                    <input type="text" id="name" class="form-control full-width" name="name" formControlName="name" [ngModel]="books?.name">
-            
-                    <label for="educationSystemId">Sistema de Ensino<span>*</span></label>
-                    <ng-select
-                        formControlName="educationSystemId"
-                        [items]="educationSystems"
-                        bindLabel="displayName"
-                        bindValue="id"
-                        appendTo="body"
-                        [ngModel]="books?.educationSystemId">
-                    </ng-select>
+                    <!-- <input type="text" id="name" class="form-control full-width" name="name" formControlName="name" [ngModel]="books?.name"> -->
+                    <input type="text" id="name" class="form-control full-width" name="name" formControlName="name" [ngModel]="comodoDispositivos?.nome">
 
-                    <label class="full-width" for="seriesIds" id="seriesIdsLabel">Anos Escolares<span>*</span></label>
-                    <ng-select
-                        formControlName="serieId"
-                        [items]="seriesId"
-                        bindLabel="displayName"
-                        bindValue="id"
-                        appendTo="body"
-                        [ngModel]="books?.serieId">
-                    </ng-select>
-
-                    <nb-checkbox name="excluded" formControlName="excluded" [ngModel]="books && books.excluded" status="success">Excluído?</nb-checkbox>
                 </div>
-                <div formArrayName="bookContent">
-                    <div *ngFor="let content of formData.controls; let i=index" class="form-control margin-bottom">
+                <div formArrayName="comodoContent">
+                    <div *ngFor="let content of formData.controls; let i=index" class="form-control margin-bottom" style="height: auto;">
                         <div>
-                            <span>Unidade</span>
-                            <span *ngIf="form.controls.bookContent.controls.length > 1" (click)="removeContent(i)">
+                            <span>Dispositivo</span>
+                            <span *ngIf="form.controls.comodoContent.controls.length > 1" (click)="removeComodoContent(i)">
                                 <button class="btn btn-danger ion-close-round padding"></button>
                             </span>
                             <br /><br />
                         </div>
-                        <div [formGroupName]="i" class="row">
-                            <div formGroupName="unity" class="col-12 col-md-4 margin-bottom">
-                                <label for="unityName" id="unityNameLabel">Nome<span>*</span></label>
-                                <input type=text id="unityName" class="form-control full-width" name="unityName" formControlName="name">
-                            </div>
-                            <div formArrayName="chapters" class="col-12 col-md-8">
+                        <div [formGroupName]="i" class="row" style="padding: 1rem">
+                            <label for="nome" id="nomeLabel">Nome<span>*</span></label>
+                            <input type=text id="nome" class="form-control full-width" name="nome" formControlName="nome">
+
+                            <label for="tipo" id="tipoLabel">tipo<span>*</span></label>
+                            <input type=text id="tipo" class="form-control full-width" name="tipo" formControlName="tipo">
+
+                            <nb-checkbox name="status" formControlName="status" status="success">Ativo</nb-checkbox>
+                            <!-- <div formArrayName="chapters" class="col-12 col-md-8">
                                 <div *ngFor="let chapter of content.get('chapters').controls; let c=index" >
                                     <div [formGroupName]="c" class="row">
                                         <div class="col-12 col-md-6">
@@ -71,15 +54,15 @@
                                 </div>
                             </div>
                             <br />
-                            <button (click)="addChaptersContent(content.controls.chapters)" type="button" class="btn btn-success margin-left">Adicionar mais Capítulos</button>
+                            <button (click)="addChaptersContent(content.controls.chapters)" type="button" class="btn btn-success margin-left">Adicionar mais Capítulos</button> -->
                         </div>
                     </div>
                 </div>
-                <button (click)="addBookContent()" type="button" class="btn btn-success">Adicionar mais Unidades</button>
+                <button (click)="addComodoContent()" type="button" class="btn btn-success">Adicionar mais um dispositivo</button>
 
                 <button type="submit" class="btn btn-success">Salvar</button>
                 <button onclick="javascript:history.back()" type="button" class="btn btn-danger">Voltar</button>
             </form>
         </nb-card-body>
     </nb-card>
-</div> -->
+</div>

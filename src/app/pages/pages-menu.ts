@@ -4,6 +4,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Casa',
     icon: 'home-outline',
-    link: '/pages/comodos',
+    link: '/pages/casa',
   },
 ];

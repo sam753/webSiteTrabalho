@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpService } from '../../services/http/http.service';
 import { TouchSequence } from 'selenium-webdriver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'comodo',
@@ -10,7 +11,16 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class ComodoComponent implements OnInit{
 
-  comodos: any;
+  comodos: any = [
+    {
+      id: 0,
+      nome: "teste1",
+    },
+    {
+      id: 1,
+      nome: "teste2",
+    }
+  ];
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -20,7 +30,7 @@ export class ComodoComponent implements OnInit{
         columnTitle: 'Ações',
         add: true,
         edit: true,
-        delete: false,
+        delete: true,
     },
     add: {
         addButtonContent: '<i class="nb-plus"></i>',
@@ -34,17 +44,20 @@ export class ComodoComponent implements OnInit{
     },
 
     columns: {
-        id: { title: 'ID', type: 'number', class: 'filter' },
         nome: { title: 'Nome', type: 'string', class: 'filter' },
+        dispositivos: { title: 'Dispositivos', type: 'string', class: 'filter' }
     },
 
     delete: {
-        deleteButtonContent: '<i class="nb-plus-circled"></i>',
+        deleteButtonContent: '<i class="nb-trash"></i>',
+        confirmDelete: true,
     },
   };
 
   constructor(
     private http: HttpService,
+    private router: Router,
+
   ) {}
 
 
@@ -56,20 +69,31 @@ export class ComodoComponent implements OnInit{
 }
 
   async ngOnInit() {
-    this.comodos = await this.getComodos();
+    // this.comodos = await this.getComodos();
 
     this.source.load(this.comodos)
   }
 
   onCreate(event) {
-    console.log('create')
+    this.router.navigate(['/pages/casa/comodo/create']);
+  }
+
+  onEdit(event) {
+    this.router.navigate([`/pages/casa/comodo/${event.data.id}`]);
+  }
+
+  onDelete(event) {
+    this.http.delete(`/Comodo/${event.data.id}`).subscribe(
+      async successData => {
+        this.comodos = await this.getComodos();
+      },
+      erroData => {}
+    );
   }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Tem certeza que quer deletar esse comodo?')) {
-      // this.http.delete(``)
       event.confirm.resolve();
-
     } else {
       event.confirm.reject();
     }
