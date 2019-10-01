@@ -40,18 +40,19 @@ export class ComodoDetailComponent implements OnInit {
                 let i = 0;
                 let dispositivoContentcontrol = <FormArray>this.form.controls['comodoContent'];
                 this.comodoDispositivos.dispositivos.forEach(element => {
-                    dispositivoContentcontrol.push(this.ComodoContent(element.nome, element.tipo, element.status));
+                    dispositivoContentcontrol.push(this.ComodoContent(element.nome, element.tipo, element.status, element.id));
                 })
                 dispositivoContentcontrol.removeAt(0)
             }
         })
     }
 
-    ComodoContent(name: string, tipo: string, status: boolean) {
+    ComodoContent(name: string, tipo: string, status: boolean, id?) {
         return this.fb.group({
             nome: name,
             tipo: tipo,
-            status: status
+            status: status,
+            id: id
         });
     }
 
@@ -62,7 +63,17 @@ export class ComodoDetailComponent implements OnInit {
 
     removeComodoContent(i: number) {
         const control = <FormArray>this.form.controls['comodoContent'];
-        control.removeAt(i);
+
+        this.route.params.subscribe(params => {
+            if (params.hasOwnProperty('id')) {
+                this.http.delete(`/Dispositivo/${control.value[i].id}`).subscribe(
+                    async successData => {control.removeAt(i)},
+                    erroData => {}
+                );
+            } else {
+                control.removeAt(i);
+            }
+        })
     }
 
     get formData() {
@@ -73,11 +84,20 @@ export class ComodoDetailComponent implements OnInit {
         let formdatas = this.form.value
 
         let formdataFormated = {
-            nome: formdatas.nome,
-            dispositivos: formdatas.comodoContent
-
-            
+            nome: formdatas.name,
+            dispositivos: formdatas.comodoContent   
         }
+
+        let formdataFormatedPost = {
+            nome: formdatas.name,
+            dispositivos: {
+                nome: formdatas.comodoContent.nome,
+                tipo: formdatas.comodoContent.tipo,
+                status: formdatas.comodoContent.status
+            }
+        }
+
+
         this.route.params.subscribe(params => {
             if (params.hasOwnProperty('id')) {
                 this.http.put(`/Comodo/${params['id']}`, formdataFormated)
@@ -85,9 +105,8 @@ export class ComodoDetailComponent implements OnInit {
                         successData => {this.router.navigate(['/pages/casa'])},
                         erroData => {}
                     );
-            }
-             else {
-                this.http.post('/Comodo', formdataFormated)
+            } else {
+                this.http.post('/Comodo', formdataFormatedPost)
                     .subscribe(
                         successData => {this.router.navigate(['/pages/casa'])},
                         erroData => {}

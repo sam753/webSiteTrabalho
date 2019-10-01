@@ -5,7 +5,6 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()" #addMountForm="ngForm">
                 <div class="form-group">
                     <label for="name">Nome<span>*</span></label>
-                    <!-- <input type="text" id="name" class="form-control full-width" name="name" formControlName="name" [ngModel]="books?.name"> -->
                     <input type="text" id="name" class="form-control full-width" name="name" formControlName="name" [ngModel]="comodoDispositivos?.nome">
 
                 </div>
@@ -26,35 +25,6 @@
                             <input type=text id="tipo" class="form-control full-width" name="tipo" formControlName="tipo">
 
                             <nb-checkbox name="status" formControlName="status" status="success">Ativo</nb-checkbox>
-                            <!-- <div formArrayName="chapters" class="col-12 col-md-8">
-                                <div *ngFor="let chapter of content.get('chapters').controls; let c=index" >
-                                    <div [formGroupName]="c" class="row">
-                                        <div class="col-12 col-md-6">
-                                            <label for="chaptersName" id="chaptersNameLabel">Capítulo {{ c + 1 }}<span>*</span></label>
-                                            <button *ngIf="content.controls.chapters.controls.length > 1" (click)="removeChaptersContent(content.controls.chapters, c)" type="button" class="btn btn-danger ion-close-round padding"></button>
-                                            <br />
-                                            <input type=text id="chaptersName" class="form-control full-width" name="chaptersName" formControlName="name"/>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <label class="full-width" for="descriptorsId" id="descriptorsIdsLabel">Descritores<span>*</span></label>
-                                            <ng-select
-                                                class="full-width"
-                                                id="descriptorsId"
-                                                name="descriptorsId"
-                                                formControlName="descriptors"
-                                                [items]="descriptors"
-                                                bindLabel="displayName"
-                                                bindValue="id"
-                                                [multiple]="true"
-                                                appendTo="body"
-                                                [closeOnSelect]="false">
-                                            </ng-select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <button (click)="addChaptersContent(content.controls.chapters)" type="button" class="btn btn-success margin-left">Adicionar mais Capítulos</button> -->
                         </div>
                     </div>
                 </div>

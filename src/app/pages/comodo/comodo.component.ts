@@ -11,16 +11,17 @@ import { Router } from '@angular/router';
 })
 export class ComodoComponent implements OnInit{
 
-  comodos: any = [
-    {
-      id: 0,
-      nome: "teste1",
-    },
-    {
-      id: 1,
-      nome: "teste2",
-    }
-  ];
+  comodos: any;
+  // comodos: any = [
+  //   {
+  //     id: 0,
+  //     nome: "teste1",
+  //   },
+  //   {
+  //     id: 1,
+  //     nome: "teste2",
+  //   }
+  // ];
 
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -69,7 +70,7 @@ export class ComodoComponent implements OnInit{
 }
 
   async ngOnInit() {
-    // this.comodos = await this.getComodos();
+    this.comodos = await this.getComodos();
 
     this.source.load(this.comodos)
   }
